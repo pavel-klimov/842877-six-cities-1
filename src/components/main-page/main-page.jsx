@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const MainPage = (props) => {
-  const {rentalArray} = props;
+  const {rentalArray, onClick} = props;
   const rentalElements = rentalArray.map((item, i) => {
     const premium = (item.isPremium) ? <div className="place-card__mark">
       <span>Premium</span>
@@ -35,7 +35,7 @@ const MainPage = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{item.title}</a>
+          <a href="#" onClick={onClick}>{item.title}</a>
         </h2>
         <p className="place-card__type">{item.type}</p>
       </div>
@@ -165,7 +165,8 @@ MainPage.propTypes = {
     rating: PropTypes.number.isRequired,
     isPremium: PropTypes.bool.isRequired,
     isBookmark: PropTypes.bool.isRequired,
-  })).isRequired
+  })).isRequired,
+  onClick: PropTypes.func
 };
 
 export default MainPage;
