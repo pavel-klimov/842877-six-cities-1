@@ -9,11 +9,11 @@ const MOCK_RENTAL = [
   {title: `MOCK title 4`, image: `mock-image.jpg`, price: 180, type: `Private room`, rating: 100, isPremium: false, isBookmark: true},
 ];
 
-it(`App correctly renders`, () => {
+it(`MainPage correctly renders`, () => {
   const tree = renderer
   .create(<MainPage
     rentalArray = {MOCK_RENTAL}
-    onClick={jest.fn()}
+    handleImageClick={jest.fn()}
   />)
   .toJSON();
   expect(tree).toMatchSnapshot();
