@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const PlaceCard = (props) => {
-  const {item, handleImageClick} = props;
+  const {item, handleImageClick, handleCardHover} = props;
   const premium = (item.isPremium) ? <div className="place-card__mark">
     <span>Premium</span>
   </div> : null;
   const bookmarkClass = (item.isBookmark) ? `place-card__bookmark-button button place-card__bookmark-button--active` : `place-card__bookmark-button button`;
-  return <article className="cities__place-card place-card">
+  return <article className="cities__place-card place-card" onMouseEnter={handleCardHover}>
     {premium}
     <div className="cities__image-wrapper place-card__image-wrapper">
       <a href="#">
@@ -51,7 +51,8 @@ PlaceCard.propTypes = {
     isPremium: PropTypes.bool.isRequired,
     isBookmark: PropTypes.bool.isRequired,
   }).isRequired,
-  handleImageClick: PropTypes.func
+  handleImageClick: PropTypes.func,
+  handleCardHover: PropTypes.func
 };
 
 export default PlaceCard;
