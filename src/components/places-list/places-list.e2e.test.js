@@ -1,6 +1,7 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import MainPage from '../main-page/main-page.jsx';
+import Enzyme, {mount} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import PlacesList from './places-list.jsx';
 
 const MOCK_RENTAL = [
   {title: `MOCK title 1`, image: `mock-image.jpg`, price: 0, type: `Apartment`, rating: 0, isPremium: true, isBookmark: true},
@@ -9,12 +10,17 @@ const MOCK_RENTAL = [
   {title: `MOCK title 4`, image: `mock-image.jpg`, price: 180, type: `Private room`, rating: 100, isPremium: false, isBookmark: true},
 ];
 
-it(`MainPage correctly renders`, () => {
-  const tree = renderer
-  .create(<MainPage
+Enzyme.configure({adapter: new Adapter()});
+
+it(`Hover on second card correctly work`, () => {
+  const handleCardHover = jest.fn();
+  const placesList = mount(<PlacesList
     rentalArray = {MOCK_RENTAL}
-    handleImageClick={jest.fn()}
-  />)
-  .toJSON();
-  expect(tree).toMatchSnapshot();
+    handleCardHover={handleCardHover}
+  />);
+
+  const secondCard = placesList.find(`.place-card`).at(1);
+  secondCard.simulate(`mouseenter`);
+
+  expect(placesList.state(`activeItem`)).toEqual(MOCK_RENTAL[1]);
 });

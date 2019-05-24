@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MainPage from '../main-page/main-page.jsx';
+import PlacesList from '../places-list/places-list.jsx';
 
 const MOCK_RENTAL = [
   {title: `MOCK title 1`, image: `mock-image.jpg`, price: 0, type: `Apartment`, rating: 0, isPremium: true, isBookmark: true},
@@ -9,9 +9,9 @@ const MOCK_RENTAL = [
   {title: `MOCK title 4`, image: `mock-image.jpg`, price: 180, type: `Private room`, rating: 100, isPremium: false, isBookmark: true},
 ];
 
-it(`MainPage correctly renders`, () => {
+it(`PlacesList correctly renders`, () => {
   const tree = renderer
-  .create(<MainPage
+  .create(<PlacesList
     rentalArray = {MOCK_RENTAL}
     handleImageClick={jest.fn()}
   />)

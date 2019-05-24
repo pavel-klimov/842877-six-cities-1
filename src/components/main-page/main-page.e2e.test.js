@@ -1,5 +1,5 @@
 import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
+import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import MainPage from '../main-page/main-page.jsx';
 
@@ -14,9 +14,9 @@ Enzyme.configure({adapter: new Adapter()});
 
 it(`Click on start game button correctly work`, () => {
   const onClick = jest.fn();
-  const helloScreen = shallow(<MainPage
+  const helloScreen = mount(<MainPage
     rentalArray = {MOCK_RENTAL}
-    onClick={onClick}
+    handleImageClick={onClick}
   />);
 
   const startButton = helloScreen.find(`h2.place-card__name a`).first();
