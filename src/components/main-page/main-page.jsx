@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PlacesList from '../places-list/places-list.jsx';
+import CitiesMap from '../cities-map/cities-map.jsx';
 
 const MainPage = (props) => {
   const {rentalArray, handleImageClick} = props;
@@ -109,7 +110,7 @@ const MainPage = (props) => {
         <PlacesList rentalArray={rentalArray} handleImageClick={handleImageClick} />
       </section>
       <div className="cities__right-section">
-        <section className="cities__map map"></section>
+        <CitiesMap />
       </div>
     </div>
   </div>
