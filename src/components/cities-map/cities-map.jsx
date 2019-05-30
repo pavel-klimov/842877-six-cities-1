@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import leaflet from 'leaflet';
 
 const ICON_SETTINGS = {
   iconUrl: `img/pin.svg`,
@@ -10,34 +9,32 @@ const ICON_SETTINGS = {
 class CitiesMap extends React.PureComponent {
   constructor(props) {
     super(props);
-    this._city = this.props.city;
-    this._zoom = this.props.zoom;
-    this._rentalArray = this.props.rentalArray;
+    this._map = React.createRef();
   }
 
   render() {
-    return <section id="map" className="cities__map map">
+    return <section id="map" className="cities__map map" ref={this._map}>
     </section>;
   }
 
   componentDidMount() {
+    const {rentalArray, city, zoom, leaflet} = this.props;
     const icon = leaflet.icon(ICON_SETTINGS);
-    const zoom = this._zoom;
-    const map = leaflet.map(`map`, {
-      center: this._city,
+    const map = leaflet.map(this._map.current, {
+      center: city,
       zoom,
       zoomControl: false,
       marker: true
     });
-    map.setView(this._city, zoom);
+    map.setView(city, zoom);
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
       attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
     })
     .addTo(map);
-    for (const rentalArray of this._rentalArray) {
+    for (const rentalItem of rentalArray) {
       leaflet
-        .marker(rentalArray.coordinates, {icon})
+        .marker(rentalItem.coordinates, {icon})
         .addTo(map);
     }
   }
@@ -56,7 +53,8 @@ CitiesMap.propTypes = {
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   })).isRequired,
   city: PropTypes.arrayOf(PropTypes.number).isRequired,
-  zoom: PropTypes.number.isRequired
+  zoom: PropTypes.number.isRequired,
+  leaflet: PropTypes.object
 };
 
 export default CitiesMap;

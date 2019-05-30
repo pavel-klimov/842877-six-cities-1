@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import MainPage from '../main-page/main-page.jsx';
+import leafletMOCK from '../../mocks/leaflet.js';
 
 const MOCK_RENTAL = [
   {title: `MOCK title 1`, image: `mock-image.jpg`, price: 0, type: `Apartment`, rating: 0, isPremium: true, isBookmark: true, coordinates: [100.123, 10.123]},
@@ -19,6 +20,7 @@ it(`MainPage correctly renders`, () => {
     handleImageClick={jest.fn()}
     city={city}
     zoom={zoom}
+    leaflet={leafletMOCK}
   />)
   .toJSON();
   expect(tree).toMatchSnapshot();

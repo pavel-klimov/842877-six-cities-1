@@ -1,5 +1,6 @@
 import React from 'react';
 import Enzyme, {mount} from 'enzyme';
+import leaflet from 'leaflet';
 import Adapter from 'enzyme-adapter-react-16';
 import MainPage from '../main-page/main-page.jsx';
 
@@ -22,6 +23,7 @@ it(`Click on start game button correctly work`, () => {
     handleImageClick={onClick}
     city={city}
     zoom={zoom}
+    leaflet={leaflet}
   />);
 
   const startButton = helloScreen.find(`h2.place-card__name a`).first();

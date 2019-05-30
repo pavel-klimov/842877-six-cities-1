@@ -4,7 +4,7 @@ import PlacesList from '../places-list/places-list.jsx';
 import CitiesMap from '../cities-map/cities-map.jsx';
 
 const MainPage = (props) => {
-  const {rentalArray, handleImageClick, city, zoom} = props;
+  const {rentalArray, handleImageClick, city, zoom, leaflet} = props;
   return <>
 <div style={{display: `none`}}>
   <svg xmlns="http://www.w3.org/2000/svg">
@@ -110,7 +110,7 @@ const MainPage = (props) => {
         <PlacesList rentalArray={rentalArray} handleImageClick={handleImageClick} />
       </section>
       <div className="cities__right-section">
-        <CitiesMap rentalArray={rentalArray} city={city} zoom={zoom} />
+        <CitiesMap rentalArray={rentalArray} city={city} zoom={zoom} leaflet={leaflet}/>
       </div>
     </div>
   </div>
@@ -131,7 +131,8 @@ MainPage.propTypes = {
   })).isRequired,
   city: PropTypes.arrayOf(PropTypes.number).isRequired,
   zoom: PropTypes.number.isRequired,
-  handleImageClick: PropTypes.func
+  handleImageClick: PropTypes.func,
+  leaflet: PropTypes.object
 };
 
 export default MainPage;

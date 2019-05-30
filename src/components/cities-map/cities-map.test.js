@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import leafletMOCK from '../../mocks/leaflet.js';
 import CitiesMap from './cities-map.jsx';
 
 const MOCK_RENTAL = [
@@ -18,6 +19,7 @@ it(`CitiesMap correctly renders`, () => {
     rentalArray={MOCK_RENTAL}
     city={city}
     zoom={zoom}
+    leaflet={leafletMOCK}
   />)
   .toJSON();
   expect(tree).toMatchSnapshot();
